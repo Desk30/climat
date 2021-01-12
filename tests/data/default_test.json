@@ -1,0 +1,13 @@
+{
+    "format": "zip",
+    "variable": [
+        "0_7cm_volumetric_soil_moisture"
+    ],
+    "product_type": ["monthly_mean"],
+    "time_aggregation": ["12_month"],
+    "year": [
+        "2019"
+    ],
+    "month": ["01"],
+    "origin": ["era5"]
+}

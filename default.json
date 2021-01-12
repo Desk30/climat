@@ -1,0 +1,14 @@
+{
+    "format": "zip",
+    "variable": [
+        "0_7cm_volumetric_soil_moisture"
+    ],
+    "product_type": ["anomaly", "climatology", "monthly_mean"],
+    "time_aggregation": ["12_month", "1_month"],
+    "year": [
+        "2019",
+        "2020"
+    ],
+    "month": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+    "origin": ["era5", "era_interim"]
+}
