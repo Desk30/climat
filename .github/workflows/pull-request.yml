@@ -21,6 +21,7 @@ jobs:
           fetch-depth: 0
       - name: install dep
         run: |
+          sudo apt-get install libhdf5-serial-dev netcdf-bin libnetcdf-dev
           git clone https://github.com/Unidata/netcdf4-python netcdf4
           pip install numpy
           cd netcdf4 && python setup.py install
