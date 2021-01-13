@@ -29,6 +29,7 @@ jobs:
           pip install numpy
           pip install -r requirements.txt
           python iterate_version.py
+          echo "Version is $(more VERSION.txt)"
 
       - name: commit version
         run: |
