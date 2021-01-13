@@ -25,7 +25,7 @@ jobs:
 
       - name: build
         run: |
-          python iterate_verison.py
+          python iterate_version.py
 
       - name: commit version
         run: |
