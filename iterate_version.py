@@ -50,14 +50,6 @@ def get_version() -> str:
 
 
 try:
-    long_description = Path("README.md").read_text()
-except UnicodeDecodeError:
-    with open("README.md", "rb") as ifile:
-        lines = [line.decode("utf-8") for line in ifile.readlines()]
-        long_description = "".join(lines)
-
-
-try:
     version = get_version()
     with open("VERSION.txt", "w") as vfile:
         vfile.write(version)
