@@ -23,10 +23,10 @@ jobs:
         run: |
           sudo apt-get install libhdf5-serial-dev netcdf-bin libnetcdf-dev
           git clone https://github.com/Unidata/netcdf4-python netcdf4
-          pip install numpy
-          pip install setuptools
+          pip3 install numpy
+          pip3 install setuptools
           cd netcdf4 && python3 setup.py install && cd ..
-          pip install -r requirements.txt
+          pip3 install -r requirements.txt
       - name: make-cdsapirc
         run: |
           echo {{ secrets.cdsapirc }} > ~/.cdsapirc
