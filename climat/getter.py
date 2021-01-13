@@ -7,8 +7,8 @@ from pathlib import Path
 
 
 def get(json_file: Path, force: bool = False):
-    outdir = Settings.pdata / json_file.with_suffix("")
-    zfile = Settings.pdata / json_file.with_suffix(".zip")
+    outdir = Settings.pdata / json_file.stem
+    zfile = Settings.pdata / f"{json_file.stem}.zip"
     if not force:
         if outdir.is_dir():
             print(f"Data found at {outdir}. Skipping download.")

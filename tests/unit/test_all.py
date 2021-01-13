@@ -6,9 +6,9 @@ Settings.pdata = Path("tests/data")
 
 
 def test_request():
-    jsonfile = Path("tests/data/default_test.json")
-    zfile = Settings.pdata / jsonfile.with_suffix(".zip")
-    outdir = Settings.pdata / jsonfile.with_suffix("")
+    jsonfile = Settings.pdata / "default_test.json"
+    zfile = jsonfile.with_suffix(".zip")
+    outdir = jsonfile.with_suffix("")
 
     if zfile.is_file():
         zfile.unlink()
@@ -19,5 +19,4 @@ def test_request():
     assert not zfile.is_file()
     assert outdir.is_dir()
     assert len(list(outdir.glob("*"))) > 0
-    zfile.unlink()
     shutil.rmtree(outdir)

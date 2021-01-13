@@ -4,7 +4,7 @@
         "0_7cm_volumetric_soil_moisture"
     ],
     "product_type": ["monthly_mean"],
-    "time_aggregation": ["12_month"],
+    "time_aggregation": ["1_month"],
     "year": [
         "2019"
     ],
