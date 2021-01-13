@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
       - name: install dep
         run: |
-          apt-get install libhdf5-serial-dev netcdf-bin libnetcdf-dev
+          sudo apt-get install libhdf5-serial-dev netcdf-bin libnetcdf-dev
           pip install -r requirements.txt
       - name: make-cdsapirc
         run: |
