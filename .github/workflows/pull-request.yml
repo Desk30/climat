@@ -21,9 +21,9 @@ jobs:
           fetch-depth: 0
       - name: install dep
         run: |
-          wget https://gist.githubusercontent.com/danwild/d7225afe4b7dbdeeb87982f0e71012f3/raw/install_netcdf4.sh
-          chmod +x install_netcdf4.sh
-          ./install_netcdf4.sh
+          git clone https://github.com/Unidata/netcdf4-python netcdf4
+          pip install numpy
+          cd netcdf4 && python setup.py install
           pip install -r requirements.txt
       - name: make-cdsapirc
         run: |
