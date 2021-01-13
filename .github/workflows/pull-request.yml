@@ -22,10 +22,11 @@ jobs:
       - name: install dep
         run: |
           sudo apt-get install libhdf5-serial-dev netcdf-bin libnetcdf-dev
-          git clone https://github.com/Unidata/netcdf4-python netcdf4
+#          git clone https://github.com/Unidata/netcdf4-python netcdf4
           pip install numpy
-          pip install setuptools
-          cd netcdf4 && python setup.py install && cd ..
+          pip install pytest
+#          pip install setuptools
+#          cd netcdf4 && python setup.py install && cd ..
           pip install -r requirements.txt
       - name: make-cdsapirc
         run: |
