@@ -22,7 +22,7 @@ jobs:
       - name: install dep
         run: |
           sudo apt-get install libhdf5-serial-dev netcdf-bin libnetcdf-dev
-          pip install -r requirements.txt
+          cat requirements.txt | xargs pip install
       - name: make-cdsapirc
         run: |
           echo {{ secrets.cdsapirc }} > ~/.cdsapirc
