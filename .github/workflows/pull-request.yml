@@ -1,0 +1,30 @@
+on:
+  pull_request:
+    branches:
+      - master
+
+name: pull-request
+jobs:
+  pytest:
+    strategy:
+      matrix:
+        pyv: [ 3.7, 3.8 ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Checkout repo
+        uses: actions/checkout@master
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0
+      - name: install dep
+        run: |
+          pip install -r requirements.txt
+      - name: make-cdsapirc
+        run: |
+          echo {{ secrets.cdsapirc }} > ~/.cdsapirc
+      - name: run
+        run: |
+          pytest -s -v
