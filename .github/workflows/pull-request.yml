@@ -19,16 +19,16 @@ jobs:
         with:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0
-#      - name: install dep
-#        run: |
-#          sudo apt-get install libhdf5-serial-dev netcdf-bin libnetcdf-dev
-#          pip install numpy
-#          pip install pytest
-#          pip install -r requirements.txt
+      - name: install dep
+        run: |
+          sudo apt-get install libhdf5-serial-dev netcdf-bin libnetcdf-dev
+          pip install numpy
+          pip install pytest
+          pip install -r requirements.txt
       - name: make-cdsapirc
         run: |
           echo "${{ secrets.cdsapirc }}" > ~/.cdsapirc
           more ~/.cdsapirc
-#      - name: run
-#        run: |
-#          pytest -s -v
+      - name: run
+        run: |
+          pytest -s -v
