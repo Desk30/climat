@@ -27,7 +27,7 @@ jobs:
 #          pip install -r requirements.txt
       - name: make-cdsapirc
         run: |
-          echo {{ secrets.cdsapirc }} > ~/.cdsapirc
+          echo ${{ secrets.cdsapirc }} > ~/.cdsapirc
           more ~/.cdsapirc
 #      - name: run
 #        run: |
