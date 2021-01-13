@@ -28,10 +28,7 @@ jobs:
           sudo apt-get install libhdf5-serial-dev netcdf-bin libnetcdf-dev
           pip install numpy
           pip install -r requirements.txt
-          echo $(more VERSION.txt)
-          git tag
           python iterate_version.py
-          echo "Version is $(more VERSION.txt)"
 
       - name: commit version
         run: |
