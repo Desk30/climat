@@ -22,7 +22,8 @@ jobs:
       - name: install dep
         run: |
           sudo apt-get install libhdf5-serial-dev netcdf-bin libnetcdf-dev
-          cat requirements.txt | xargs pip install
+          pip install numpy
+          pip install -r requirements.txt
       - name: make-cdsapirc
         run: |
           echo {{ secrets.cdsapirc }} > ~/.cdsapirc
