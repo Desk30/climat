@@ -21,12 +21,9 @@ jobs:
           fetch-depth: 0
       - name: install dep
         run: |
-          sudo apt-get install gcc libpq-dev -y
-          sudo apt-get install python-dev  python-pip -y
-          sudo apt-get install python${{ matrix.python-version }}-dev python${{ matrix.python-version }}-pip python3-venv python${{ matrix.python-version }}-wheel -y
-          sudo apt-get install libhdf5-serial-dev netcdf-bin libnetcdf-dev
-          pip install numpy
-          pip install wheel
+          wget https://gist.githubusercontent.com/danwild/d7225afe4b7dbdeeb87982f0e71012f3/raw/install_netcdf4.sh
+          chmod +x install_netcdf4.sh
+          ./install_netcdf4.sh
           pip install -r requirements.txt
       - name: make-cdsapirc
         run: |
