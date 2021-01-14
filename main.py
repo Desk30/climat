@@ -1,6 +1,6 @@
 import sys
 
-from climat import get, Settings
+from climat import retrieve_data, read_data, Settings, get_data_dir
 from pathlib import Path
 import argparse
 import os
@@ -57,4 +57,15 @@ if json_file.is_dir():
 
 force = args.f
 data_path = json_file.with_suffix(".zip")
-data = get(json_file, force)
+retrieve_data(json_file, force)
+
+# Test on example files (plotting should be moved to a dedicated function)
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots()
+ds_dict = read_data(get_data_dir(json_file), "12month*v03.grib")
+for (key, ds) in ds_dict.items():
+    print(key)
+    print(ds.swvl1)
+    ds.swvl1.plot()
+    plt.show()
+    break # Just test on 1 entry

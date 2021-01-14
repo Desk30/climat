@@ -1,6 +1,6 @@
 import shutil
 from pathlib import Path
-from climat import get, Settings
+from climat import retrieve_data, Settings
 
 Settings.pdata = Path("tests/data")
 
@@ -15,7 +15,7 @@ def test_request():
     if outdir.is_dir():
         shutil.rmtree(outdir)
 
-    get(jsonfile)
+    retrieve_data(jsonfile)
     assert not zfile.is_file()
     assert outdir.is_dir()
     assert len(list(outdir.glob("*"))) > 0

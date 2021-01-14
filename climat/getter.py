@@ -1,13 +1,12 @@
 import cdsapi
 import zipfile
 import json
-from .settings import Settings
-from .reader import get_all_data
+from .settings import Settings, get_data_dir
 from pathlib import Path
 
 
-def get(json_file: Path, force: bool = False):
-    outdir = Settings.pdata / json_file.stem
+def retrieve_data(json_file: Path, force: bool = False):
+    outdir = get_data_dir(json_file)
     zfile = Settings.pdata / f"{json_file.stem}.zip"
     if not force:
         if outdir.is_dir():
@@ -19,8 +18,6 @@ def get(json_file: Path, force: bool = False):
 
     download(json_file, zfile)
     extract(zfile)
-
-    return get_all_data(outdir)
 
 
 def download(json_file: Path, zfile: Path):
