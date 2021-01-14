@@ -1,5 +1,4 @@
-pandas
-plotly
-python-dotenv
-cdsapi
-netCDF4
+xarray==0.16.2
+matplotlib==3.3.2
+cdsapi==0.3.1
+python-dotenv==0.15.0

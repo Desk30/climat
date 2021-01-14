@@ -1,11 +1,15 @@
 from pathlib import Path
-from netCDF4 import Dataset
+import xarray as xr
 from typing import Dict
 
 
-def get_all_data(dirpath: Path) -> Dict[str, Dataset]:
-    dfs = {}
-    for afile in dirpath.glob("*.nc"):
-        print(f"Reading file {afile}...")
-        dfs[afile.stem] = Dataset(afile)
-    return dfs
+def read_data(dirpath: Path, pattern: str) -> Dict[str, xr.Dataset]:
+    ds_dict = {}
+    for data_file in dirpath.glob(pattern):
+        print(f"Reading file {data_file}...")
+        file_extension = data_file.suffix
+        if file_extension == ".grib":
+            ds_dict[data_file.stem] = xr.open_dataset(data_file, engine="cfgrib")
+        else:
+            raise TypeError(f"unsupported data type {file_extension}")
+    return ds_dict
