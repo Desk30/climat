@@ -4,6 +4,18 @@ from typing import Dict
 
 
 def read_data(dirpath: Path, pattern: str) -> Dict[str, xr.Dataset]:
+    """
+    Read all files matching a pattern and return the data as a dictionary.
+
+    Supported types:
+    - grib
+
+    Args:
+        dirpath (pathlib.Path): The data directory.
+        pattern (str): A pattern for filtering the files.
+    Returns:
+        Dict[str, netCDF4._netCDF4.Dataset]: The data indexed by data file stem.
+    """
     ds_dict = {}
     for data_file in dirpath.glob(pattern):
         print(f"Reading file {data_file}...")
