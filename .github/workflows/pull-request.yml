@@ -32,5 +32,4 @@ jobs:
           more ~/.cdsapirc
       - name: run
         run: |
-          pip -V
           pytest -s -v
