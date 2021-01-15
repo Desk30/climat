@@ -10,10 +10,15 @@ def read_data(dirpath: Path, pattern: str) -> Dict[str, xr.Dataset]:
     Supported types:
     - grib
 
-    Args:
-        dirpath (pathlib.Path): The data directory.
-        pattern (str): A pattern for filtering the files.
-    Returns:
+    Parameters
+    ----------
+    dirpath: Path
+        The data directory.
+    pattern: str
+        A pattern for filtering the files.
+
+    Returns
+    -------
         Dict[str, netCDF4._netCDF4.Dataset]: The data indexed by data file stem.
     """
     ds_dict = {}
