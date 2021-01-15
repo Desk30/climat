@@ -15,56 +15,69 @@ parser.add_argument(
     "-f", action="store_true", help="Force redownload of specified data.", default=os.environ.get("force", False),
 )
 parser.add_argument(
+    "--chunks", type=str, help="Dask's chunks argument", default=os.environ.get("chunks", None),
+)
+parser.add_argument(
     "-i",
     type=str,
     help="Input json file containing the instructions to download the data",
     default=os.environ.get("data_json", "default.json"),
 )
 parser.add_argument(
-    "--clean",
-    action="store_true",
-    help="Deletes data corresponding to specified json",
+    "--clean", action="store_true", help="Deletes data corresponding to specified json",
 )
 parser.add_argument(
-    "--cleanall",
-    action="store_true",
-    help="Deletes data corresponding to specified json",
+    "--dask", action="store_true", help="Use dask",
+)
+parser.add_argument(
+    "--cleanall", action="store_true", help="Deletes data corresponding to specified json",
 )
 args = parser.parse_args()
 
-json_file = Path(args.i)
+if __name__ == "__main__":
 
-if not Settings.pdata.is_dir():
-    Settings.pdata.mkdir()
+    if args.dask:
+        from dask.distributed import Client
 
-if args.clean:
-    zfile = Settings.pdata / json_file.with_suffix(".zip")
-    if zfile.is_file():
-        zfile.unlink()
-    if (Settings.pdata / json_file.with_suffix("")).is_dir:
-        shutil.rmtree(Settings.pdata / json_file.with_suffix(""))
-    sys.exit()
-if args.cleanall:
-    if Settings.pdata.is_dir:
-        shutil.rmtree(Settings.pdata)
-    Settings.pdata.mkdir()
-    sys.exit()
+        client = Client()
+    if args.chunks is not None:
+        # noinspection PyUnresolvedReferences
+        args.chunks = {part.split(":")[0]: int(part.split(":")[1]) for part in args.chunks.replace(" ", "")}
 
-if not json_file.is_file():
-    raise FileNotFoundError(f"No such file: {json_file}")
-if json_file.is_dir():
-    raise IsADirectoryError(str(json_file))
+    json_file = Path(args.i)
 
-force = args.f
-data_path = json_file.with_suffix(".zip")
-retrieve_data(json_file, force)
+    if not Settings.pdata.is_dir():
+        Settings.pdata.mkdir()
 
-# Test on example files (plotting should be moved to a dedicated function)
+    if args.clean:
+        zfile = Settings.pdata / json_file.with_suffix(".zip")
+        if zfile.is_file():
+            zfile.unlink()
+        if (Settings.pdata / json_file.with_suffix("")).is_dir:
+            shutil.rmtree(Settings.pdata / json_file.with_suffix(""))
+        sys.exit()
+    if args.cleanall:
+        if Settings.pdata.is_dir:
+            shutil.rmtree(Settings.pdata)
+        Settings.pdata.mkdir()
+        sys.exit()
 
-ds_dict = read_data(get_data_dir(json_file), "12month*v03.grib")
-for (key, ds) in ds_dict.items():
-    print(key)
-    print(ds.swvl1)
-    plot(ds.swvl1)
-    break
+    if not json_file.is_file():
+        raise FileNotFoundError(f"No such file: {json_file}")
+    if json_file.is_dir():
+        raise IsADirectoryError(str(json_file))
 
+    force = args.f
+    data_path = json_file.with_suffix(".zip")
+    retrieve_data(json_file, force)
+
+    # Test on example files (plotting should be moved to a dedicated function)
+
+    ds_dict = read_data(get_data_dir(json_file), "12month*v03.grib")
+    for (key, ds) in ds_dict.items():
+        print(key)
+        for var in ds.variables:
+            print(var)
+        print(ds.swvl1)
+        plot(ds.swvl1)
+        break

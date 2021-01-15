@@ -1,6 +1,7 @@
 xarray
 cfgrib
-cdsapi==0.4.0
+cdsapi
 python-dotenv
 eccodes-python
 matplotlib
+dask[distributed,dataframe]
