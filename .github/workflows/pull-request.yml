@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/setup-python@v2
         with:
-          pyv: ${{ matrix.pyv-version }}
+          python-version: ${{ matrix.pyv-version }}
       - name: Checkout repo
         uses: actions/checkout@master
         with:
