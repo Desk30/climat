@@ -1,6 +1,6 @@
-xarray==0.16.2
+xarray
 cfgrib
 cdsapi==0.4.0
-python-dotenv==0.15.0
+python-dotenv
 eccodes-python
-matplotlib==3.3.3
+matplotlib

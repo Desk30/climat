@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/setup-python@v2
         with:
-          pyv: ${{ matrix.pyv-version }}
+          python-version: ${{ matrix.pyv }}
       - name: Checkout repo
         uses: actions/checkout@master
         with:
@@ -22,6 +22,7 @@ jobs:
       - name: install dep
         run: |
           sudo apt-get install libhdf5-serial-dev netcdf-bin libnetcdf-dev libeccodes-tools
+          pip install wheel
           pip install numpy
           pip install pytest
           pip install -r requirements.txt

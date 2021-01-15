@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python ${{ matrix.pyv }}
         uses: actions/setup-python@v2
         with:
-          pyv: ${{ matrix.pyv }}
+          python-version: ${{ matrix.pyv }}
 
       - uses: actions/checkout@master
         with:
